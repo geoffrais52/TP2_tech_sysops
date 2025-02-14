@@ -7,30 +7,30 @@ on:
 
 jobs: 
   build:
-  runs-on: ubuntu-latest 
+   runs-on: ubuntu-latest 
   
   
   steps: 
-  - name: Checkout code
-    uses: actions/checkout@v2 
-  - name: Install dependencies
-    run: npm install 
+    - name: Checkout code
+      uses: actions/checkout@v2 
+    - name: Install dependencies
+      run: npm install 
   
-  - name: Run tests
-    run: npm test 
-  - name: Build Docker image 
-    run: docker build -t TP2_SysOps.
-  - name: Log in to Docker Hub 
-    run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin 
+    - name: Run tests
+      run: npm test 
+    - name: Build Docker image 
+      run: docker build -t TP2_SysOps.
+    - name: Log in to Docker Hub 
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin 
     
-  - name: Push Docker image 
-    run: docker push <your-dockerhub-username>/TP_SysOps:latest 
+    - name: Push Docker image 
+      run: docker push <your-dockerhub-username>/TP_SysOps:latest 
       
-deploy: 
-  needs: build 
+  deploy: 
+      needs: build 
   runs-on: ubuntu-latest
   
-  steps: 
+    steps: 
   - name: Install kubectl 
     run: | 
       curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
