@@ -35,7 +35,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Install kubectl
-      run: |
-        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.
+  steps:
+  - name: Install kubectl
+    run: |
+      curl -LO "https://dl.k8s.io/release/${K8S_VERSION}/bin/linux/amd64/kubectl"
+      sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+  - name: Deploy to Kubernetes
+    run: |
+      kubectl apply -f k8s/deployment.yaml
+      kubectl apply -f k8s/service.yaml
