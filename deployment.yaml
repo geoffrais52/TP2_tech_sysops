@@ -1,4 +1,0 @@
-- name: Afficher l'arborescence du repo
-  run: |
-    echo "Arborescence du dépôt :"
-    find $GITHUB_WORKSPACE
