@@ -42,7 +42,9 @@ jobs:
         run: |
           ls -R
 
+        
+
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f deployment.yaml
+          kubectl apply -f $GITHUB_WORKSPACE/deployment.yaml
           kubectl apply -f service.yaml
