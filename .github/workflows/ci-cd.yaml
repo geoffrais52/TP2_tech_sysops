@@ -41,8 +41,19 @@ jobs:
       - name: List files in the repository  # Débogage pour vérifier les fichiers
         run: |
           ls -R
+      
+      - name: Trouver le chemin du dossier contenant deployment.yaml
+        run: |
+          file_path=$(find $GITHUB_WORKSPACE -name "deployment.yaml")
+          if [ -z "$file_path" ]; then
+            echo "Error: deployment.yaml introuvable !"
+            exit 1
+          else
+            dir_path=$(dirname "$file_path")
+            echo "Le fichier deployment.yaml se trouve dans : $dir_path"
+            echo "DEPLOYMENT_PATH=$dir_path" >> $GITHUB_ENV
+          fi
 
-        
 
       - name: Deploy to Kubernetes
         run: |
