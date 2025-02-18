@@ -44,9 +44,9 @@ jobs:
       
       - name: Trouver le chemin du dossier contenant deployment.yaml
         run: |
-          file_path=$(find $GITHUB_WORKSPACE -name "deployment.yaml")
+          file_path=$(find $GITHUB_WORKSPACE -name "index.js")
           if [ -z "$file_path" ]; then
-            echo "Error: deployment.yaml introuvable !"
+            echo "Error: index.js introuvable !"
             exit 1
           else
             dir_path=$(dirname "$file_path")
