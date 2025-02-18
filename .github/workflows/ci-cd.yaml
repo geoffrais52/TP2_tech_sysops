@@ -1,3 +1,5 @@
+
+
 name: CI/CD Pipeline
 
 on:
@@ -10,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Checkout code (forcer le clonage complet)
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Télécharge tout l'historique Git
+
       - name: Checkout code
         uses: actions/checkout@v2
 
