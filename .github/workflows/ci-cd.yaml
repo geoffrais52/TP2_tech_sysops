@@ -42,19 +42,6 @@ jobs:
         run: |
           ls -R
       
-      - name: Trouver le chemin du dossier contenant deployment.yaml
-        run: |
-          file_path=$(find $GITHUB_WORKSPACE -name "index.js")
-          if [ -z "$file_path" ]; then
-            echo "Error: index.js introuvable !"
-            exit 1
-          else
-            dir_path=$(dirname "$file_path")
-            echo "Le fichier deployment.yaml se trouve dans : $dir_path"
-            echo "DEPLOYMENT_PATH=$dir_path" >> $GITHUB_ENV
-          fi
-
-
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f $GITHUB_WORKSPACE/deployment.yaml
