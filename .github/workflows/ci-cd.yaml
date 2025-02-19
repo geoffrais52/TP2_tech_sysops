@@ -47,6 +47,7 @@ jobs:
       
       - name: Set KUBECONFIG from secret
         run: |
+            mkdir -p ~/.kube
             echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
             kubectl config use-context cicd-context-sa2-context
             
